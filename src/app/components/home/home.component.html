@@ -1,0 +1,91 @@
+<p-accordion [multiple]="true">
+  <p-accordionTab header="Missão">
+    “Trazer praticidade e facilidade é o principal objetivo do Help Remote, visando assim, que a sociedade desfrute
+    das tecnologias acessíveis atuais”
+  </p-accordionTab>
+  <p-accordionTab header="Visão">
+    “A visão do Help Remote baseia-se no auxílio aos usuários na resolução de erros comuns do software de forma
+    eficaz, interativa e prática através do uso da ajuda à distância de um técnico proporcionada pela Internet. ”
+  </p-accordionTab>
+  <p-accordionTab header="Valores">
+    “O valor essencial do Help Remote é fundamentado na criação de uma aplicação web fazendo uso da informatização
+    como aliada ao bem comum do ser humano. Deste modo, a tecnologia consciente torna-se acessível a todos. ”
+  </p-accordionTab>
+</p-accordion>
+<hr/>
+<p-galleria [images]="images" panelWidth="500" panelHeight="313" [showCaption]="true"></p-galleria>
+<hr/>
+<div class="col-md-6">
+  <p-chart type="pie" [data]="data"></p-chart>
+</div>
+<div class="col-md-6">
+  <!-- Info Boxes Style 2 -->
+  <div class="info-box bg-yellow">
+    <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+
+    <div class="info-box-content">
+      <span class="info-box-text">Ajudas Realizadas</span>
+      <span class="info-box-number">{{ summary?.amountFechado }}</span>
+
+      <div class="progress">
+        <div class="progress-bar" style="width: 50%"></div>
+      </div>
+      <span class="progress-description">
+        Aumento de 50% em 30 dias.
+      </span>
+    </div>
+    <!-- /.info-box-content -->
+  </div>
+  <!-- /.info-box -->
+  <div class="info-box bg-green">
+    <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+    <div class="info-box-content">
+      <span class="info-box-text">Mençoes</span>
+      <span class="info-box-number">890</span>
+
+      <div class="progress">
+        <div class="progress-bar" style="width: 20%"></div>
+      </div>
+      <span class="progress-description">
+        Aumento de 20% em 30 dias.
+      </span>
+    </div>
+    <!-- /.info-box-content -->
+  </div>
+  <!-- /.info-box -->
+  <div class="info-box bg-red">
+    <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
+
+    <div class="info-box-content">
+      <span class="info-box-text">Usuários</span>
+      <span class="info-box-number">5</span>
+
+      <div class="progress">
+        <div class="progress-bar" style="width: 70%"></div>
+      </div>
+      <span class="progress-description">
+        Aumento de 70% em 30 dias.
+      </span>
+    </div>
+    <!-- /.info-box-content -->
+  </div>
+  <!-- /.info-box -->
+  <div class="info-box bg-aqua">
+    <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+
+    <div class="info-box-content">
+      <span class="info-box-text">Tickets</span>
+      <span class="info-box-number">28</span>
+
+      <div class="progress">
+        <div class="progress-bar" style="width: 40%"></div>
+      </div>
+      <span class="progress-description">
+        Aumento de 40% em 30 dias.
+      </span>
+    </div>
+    <!-- /.info-box-content -->
+  </div>
+  <!-- /.info-box -->
+</div>

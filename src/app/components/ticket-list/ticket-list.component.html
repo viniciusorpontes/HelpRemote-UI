@@ -1,0 +1,100 @@
+<div [ngClass]="classCss" role="alert" *ngIf="message">
+  <strong>{{ message.text }}</strong>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-header with-border">
+        <h3 class="box-title">Lista de Ticket</h3>
+      </div>
+      <div class="box-body">
+        <div class="form-group" *ngIf="shared.user.profile == 'TECNICO'">
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="assignedToMe" id="assignedToMe" [(ngModel)]="assignedToMe">
+              <b>Assinado por mim:</b>
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputNumero" class="col-sm-2 control-label">Numero</label>
+          <div class="col-sm-10">
+            <input type="integer" [(ngModel)]="ticketFilter.numero" name="numero" class="form-control" id="inputNumero">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputTitulo" class="col-sm-2 control-label">Título</label>
+          <div class="col-sm-10">
+            <input type="text" [(ngModel)]="ticketFilter.titulo" name="titulo" class="form-control" id="inputTitulo">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputStatus" class="col-sm-2 control-label">Status</label>
+          <div class="col-sm-10">
+            <select [(ngModel)]="ticketFilter.status" class="form-control select2" name="status" id="inputStatus"
+              style="width: 100%;">
+              <option>Novo</option>
+              <option>Resolvido</option>
+              <option>Aprovado</option>
+              <option>Desaprovado</option>
+              <option>Assinado</option>
+              <option>Fechado</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPrioridade" class="col-sm-2 control-label">Prioridade</label>
+          <div class="col-sm-10">
+            <select [(ngModel)]="ticketFilter.prioridade" class="form-control select2" name="prioridade"
+              id="inputPrioridade" style="width: 100%;">
+              <option>Alta</option>
+              <option>Normal</option>
+              <option>Baixa</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="box-footer">
+        <button class="btn btn-info pull-left" (click)="cleanFilter()">Limpar Filtro</button>
+        <button style="margin-left: 10px" class="btn btn-info pull-right" (click)="filter()">Filtro</button>
+      </div>
+      <div class="box-body">
+        <table class="table table-bordered">
+          <tr>
+            <th>Número</th>
+            <th>Título</th>
+            <th>Prioridade</th>
+            <th>Status</th>
+            <th>Proprietário</th>
+            <th *ngIf="shared.user.profile == 'CLIENTE'">&nbsp;</th>
+            <th *ngIf="shared.user.profile == 'CLIENTE'">&nbsp;</th>
+            <th>&nbsp;</th>
+          </tr>
+          <tr *ngFor="let ticket of listTicket">
+            <td>{{ticket.numero}}</td>
+            <td>{{ticket.titulo}}</td>
+            <td>{{ticket.prioridade}}</td>
+            <td>{{ticket.status}}</td>
+            <td>{{ticket.user.email}}</td>
+            <td style="width: 10px;" *ngIf="shared.user.profile == 'CLIENTE'">
+              <button class="btn btn-primary" (click)="edit(ticket.id)">Editar</button>
+            </td>
+            <td style="width: 10px;" *ngIf="shared.user.profile == 'CLIENTE'">
+              <button class="btn btn-danger" (click)="delete(ticket.id)">Deletar</button>
+            </td>
+            <td style="width: 10px;"><button class="btn btn-success" (click)="detail(ticket.id)">Detalhes</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="box-footer clearfix">
+        <ul class="pagination pagination-sm no-margin pull-right">
+          <li><a href="" (click)="setPreviousPage($event)">&laquo;</a></li>
+          <li *ngFor="let p of pages; let i=index">
+            <a [ngClass]="{'pagination-focus':i==page}" href="" (click)="setPage(i,$event)">{{i+1}}</a>
+          </li>
+          <li><a href="" (click)="setNextPage($event)">&raquo;</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

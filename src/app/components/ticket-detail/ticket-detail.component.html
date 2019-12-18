@@ -1,0 +1,82 @@
+<div class="col-md-12" style="margin-left:0%">
+  <div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">Detalhes dos Tickets</h3>
+    </div>
+    <form class="form-horizontal" #form="ngForm" (ngSubmit)="register()" novalidate>
+      <div [ngClass]="classCss" role="alert" *ngIf="message">
+        <strong>{{ message.text }}</strong>
+      </div>
+      <div class="box-body">
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+                <b>Numero:</b> <span>{{ticket.numero}}</span> 
+                <span class="pull-right"><b>Titulo:</b> <span>{{ticket.titulo}}</span></span>
+          </li>
+          <li class="list-group-item">
+            <b>Prioridade:</b> <span>{{ticket.prioridade}}</span>
+            <span class="pull-right">
+              <b>Criado por:</b> <span>{{ticket?.user?.email}}</span>
+            </span>
+          </li>
+          <li class="list-group-item">
+              <b>Status:</b> <span>{{ticket.status}}</span>
+              <span class="pull-right">
+                <b>Assinado por:</b> <span>{{ticket?.assignedUser?.email}}</span>
+              </span>
+          </li>
+          <li class="list-group-item">
+              <b>Data:</b> <span>{{ticket.data | date:'dd/MM/yyyy'}}</span>
+            </li>
+          <li class="list-group-item">
+            <b>Descrição:</b> <span>{{ticket.descricao}}</span>
+          </li>
+          <li class="list-group-item">
+             <span><img [src]="ticket.imagem" width="450px" height="370px"></span>
+             <span class="pull-right">
+                <table class="table table-bordered">
+                    <tr>
+                      <th>Mudança de Usuario</th> 
+                      <th>Data da Mudança de Status</th>
+                      <th>Status</th>
+                    </tr>
+                    <tr *ngFor="let change of ticket.changes">
+                        <td>{{ change?.userChange.email}}</td>
+                        <td>{{ change?.dateChangeStatus | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+                        <td>{{ change?.status }}</td>
+                    </tr>  
+                       
+                </table>    
+              </span>
+          </li>
+        </ul>     
+      </div>
+      <div class="box-footer">
+        <button *ngIf="shared.user.profile == 'TECNICO' && ticket.status == 'Novo'"
+                (click)="changeStatus('Assinado')" 
+                class="btn btn-primary">Aceito
+        </button>
+
+        <button *ngIf="shared.user.profile == 'TECNICO' && (ticket.status == 'Assinado' || ticket.status == 'Desaprovado')" 
+                (click)="changeStatus('Resolvido')" 
+                class="btn btn-primary">Resolvido
+        </button>
+
+        <button *ngIf="shared.user.profile == 'CLIENTE' && ticket.status == 'Resolvido'" 
+                (click)="changeStatus('Aprovado')" 
+                class="btn btn-primary">Aprovado
+        </button>
+        &nbsp;
+        <button *ngIf="shared.user.profile == 'CLIENTE' && ticket.status == 'Resolvido'" 
+                (click)="changeStatus('Desaprovado')" 
+                class="btn btn-primary">Desaprovado
+        </button>
+
+        <button *ngIf="shared.user.profile == 'TECNICO' && ticket.status == 'Aprovado'"
+                (click)="changeStatus('Fechado')" 
+                class="btn btn-primary">Fechado
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
